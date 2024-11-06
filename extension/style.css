@@ -1,0 +1,62 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: #f4f4f4; /* Light background for better contrast */
+}
+
+#extensions-section {
+  display: flex;
+  flex-direction: column; /* Stack columns vertically */
+  gap: 20px; /* Increase gap between columns */
+  overflow-y: auto; /* Allow vertical scrolling if necessary */
+}
+
+.column-drop-zone {
+  flex-grow: 1; /* Allow the drop zone to grow */
+  border: 1px dashed #ccc; /* Optional: Add a border to the drop zone */
+  padding: 10px; /* Optional: Padding for aesthetics */
+  overflow-y: auto; /* Allow scrolling if content overflows */
+}
+
+.kanban-column {
+  position: relative;
+  margin: 10px;
+}
+
+.kanban-column h2 {
+  position: sticky; /* Use sticky positioning */
+  top: 0; /* Stick to the top of the column */
+  background-color: white; /* Background color to cover content behind */
+  z-index: 1; /* Ensure it stays above other content */
+  padding: 10px; /* Padding for better appearance */
+  border-bottom: 1px solid #ccc; /* Optional: Add a border */
+}
+
+.kanban-column {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #ffffff; /* White background for columns */
+  padding: 15px; /* More padding for better spacing */
+  min-height: 100px; /* Increased minimum height for visibility */
+}
+
+.kanban-column {
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  height: 100%; /* Ensure it takes full height */
+}
+
+.kanban-column h3 {
+  text-align: center;
+  margin-top: 0;
+  font-size: 1.5em; /* Larger font size for headers */
+}
+
+.extensions-item {
+  padding: 15px; /* Increased padding for items */
+  margin-bottom: 10px; /* More space between items */
+  background-color: #e7f3fe; /* Light blue background for items */
+  border: 1px solid #007bff; /* Blue border for items */
+  border-radius: 4px;
+}

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extension Kanban Organizer</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            width: 800px;
+            height: 600px;
+            font-size: 12px;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+
+        .sidebar {
+            width: 200px;
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-right: 1px solid #e9ecef;
+        }
+
+        .category-input {
+            width: 100%;
+            display: flex;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+
+        .category-input input {
+            flex: 1;
+            padding: 4px 8px;
+            border: 1px solid #ced4da;
+            border-radius: 3px;
+            font-size: 11px;
+        }
+
+        .category-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .category-item {
+            padding: 5px 10px;
+            margin: 2px 0;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 11px;
+        }
+
+        .category-item:hover {
+            background-color: #e9ecef;
+        }
+
+        .kanban-board {
+            flex: 1;
+            display: flex;
+            overflow-x: auto;
+            padding: 15px;
+            background-color: #f8f9fa;
+            gap: 15px;
+        }
+
+        .kanban-column {
+            min-width: 250px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .kanban-column h2 {
+            margin: 0;
+            padding: 10px 15px;
+            font-size: 13px;
+            color: #495057;
+            border-bottom: 1px solid #e9ecef;
+            background-color: #f8f9fa;
+            border-radius: 5px 5px 0 0;
+        }
+
+        .column-drop-zone {
+            min-height: 100px;
+            padding: 10px;
+        }
+
+        .kanban-card {
+            margin-bottom: 8px;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            cursor: move;
+            transition: all 0.2s ease;
+        }
+
+        .kanban-card:hover {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transform: translateY(-1px);
+        }
+
+        .extension-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .extension-icon {
+            width: 16px;
+            height: 16px;
+        }
+
+        .extension-name {
+            margin: 0;
+            font-size: 11px;
+            color: #495057;
+            font-weight: 500;
+        }
+
+        .extension-controls {
+            display: flex;
+            gap: 4px;
+            margin-top: 8px;
+        }
+
+        .btn {
+            padding: 3px 8px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 10px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        .btn-enable {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .btn-disable {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .btn-add {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .dragging {
+            opacity: 0.5;
+            border: 2px dashed #007bff;
+        }
+
+        .drop-hover {
+            background-color: #e9ecef;
+        }
+
+        .error-message {
+            position: fixed;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #dc3545;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 4px;
+            font-size: 11px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>Categories</h2>
+            <div class="category-input">
+                <input type="text" id="newCategoryInput" placeholder="New category...">
+                <button class="btn btn-add" id="addCategoryButton">Add</button>
+            </div>
+            <button id="resetCategories">Reset Categories</button>
+            <ul class="category-list" id="categoryList"></ul>
+        </div>
+        <div class="kanban-board" id="kanbanBoard">
+            <div class="kanban-column">
+                <h2>Enabled</h2>
+                <div class="column-drop-zone" data-status="enabled"></div>
+            </div>
+            <div class="kanban-column">
+                <h2>Disabled</h2>
+                <div class="column-drop-zone" data-status="disabled"></div>
+            </div>
+            <div class="kanban-column">
+                <h2>Development</h2>
+                <div class="column-drop-zone" data-status="development"></div>
+            </div>
+        </div>
+    </div>
+    <script src="popup.js"></script>
+</body>
+</html>
